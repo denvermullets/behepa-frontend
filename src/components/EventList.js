@@ -4,7 +4,7 @@ class EventList extends Component {
     render() {
         return (
             <div>
-                
+                Event List
             </div>
         );
     }

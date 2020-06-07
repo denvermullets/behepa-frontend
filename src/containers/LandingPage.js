@@ -4,7 +4,9 @@ import EventForm from '../components/EventForm';
 class LandingPage extends Component {
     render() {
         return (
-            <EventForm />
+            <>
+                Hi and welcome to my page
+            </>
         );
     }
 }
