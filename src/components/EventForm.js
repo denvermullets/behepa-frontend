@@ -1,66 +1,79 @@
 import React, { Component } from 'react';
-import { Button, Radio, Form, Input, Select, DatePicker, InputNumber, Switch, Checkbox } from 'antd';
+import { Button, Radio, Form, Input, Select, DatePicker, TimePicker, Switch, Checkbox } from 'antd';
+import moment from 'moment'
 
-const layout = {
-    labelCol: {
-      span: 8,
-    },
-    wrapperCol: {
-      span: 16,
-    },
-  };
-  const tailLayout = {
-    wrapperCol: {
-      offset: 8,
-      span: 16,
-    },
-  };
+const { Option } = Select
+const { TextArea } = Input
+const format = 'HH:mm';
 
 class EventForm extends Component {
-    render() {
-        return (
-            <Form
-                {...layout}
-                name="basic"
-            >
-            <Form.Item
-                label="Username"
-                name="username"
-                rules={[
-                {
-                    required: true,
-                    message: 'Please input your username!',
-                },
-                ]}
-            >
-                <Input />
-            </Form.Item>
+  state = {
 
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
+  }
 
-      <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
 
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
-        );
-    }
+  render() {
+    return (
+      <>
+        <Form 
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 14 }}
+          layout="horizontal"
+        >
+          <Form.Item>
+            <Select
+              name="event"
+              showSearch
+              style={{ width: 200 }}
+              placeholder="Select an event"
+              optionFilterProp="children"
+              // onChange={onChange}
+              // onFocus={onFocus}
+              // onBlur={onBlur}
+              // onSearch={onSearch}
+              filterOption={(input, option) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+              >
+              <Option value="lastwish">Last Wish</Option>
+              <Option value="gos">Garden of Salvation</Option>
+              <Option value="scourge">Scourge of the Past</Option>
+              <Option value="nf">Nightfall</Option>
+            </Select>
+          </Form.Item>
+          
+          <Form.Item>
+            <DatePicker  />
+          </Form.Item>
+          
+          <Form.Item>
+            <TimePicker
+              defaultValue={moment('12:00', format)}
+              format={format}
+              />
+          </Form.Item>
+          
+          <Form.Item>
+            <Checkbox>Need Helper</Checkbox>
+          </Form.Item>
+          
+          <Form.Item>
+
+          <TextArea
+            // value={value}
+            // onChange={this.onChange}
+            placeholder="Notes for event"
+            autoSize={{ minRows: 1, maxRows: 5 }}
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit">Create Event</Button>
+          </Form.Item>
+        </Form>
+      </>
+    );
+  }
 }
 
 export default EventForm;
