@@ -2,7 +2,6 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import './App.css';
 import { Route, Switch } from 'react-router-dom'
-import EventForm from './components/EventForm';
 import LandingPage from './containers/LandingPage';
 import Navbar from './components/Navbar';
 import ClanEvent from './containers/ClanEvent';
@@ -20,7 +19,7 @@ function App() {
         {/* <Route path="/pets/:id" component={PetProfile}/>  */}
         <Route path="/roster" component={ClanRoster}/> 
         <Route path="/events" component={ClanEvent}/>
-        <Route path="/leaderboard" component={Leaderboard}/>
+        <Route path="/leaderboards" component={Leaderboard}/>
         {/* <Route path="/help" render={(routerProps) => <Help urgency={5} {...routerProps}/>}/> */}
         <Route path="/" component={LandingPage}/>
       </Switch>
