@@ -3,11 +3,46 @@ import EventForm from '../components/EventForm';
 import EventList from '../components/EventList';
 
 class ClanEvent extends Component {
+
+    state = {
+        allEvents: [],
+    }
+
+    componentDidMount() {
+        this.loadAllEvents()
+    }
+
+    addNewEvent = (eventInfo) => {
+        fetch('http://localhost:3000/events', {
+            method: 'POST',
+            body: JSON.stringify({
+                name: 'n/a',
+                description: eventInfo.description,
+                activity: eventInfo.event,
+                need_helper: eventInfo.helper,
+                event_day: eventInfo.date,
+                event_time: eventInfo.time
+            }),
+            headers: { "Content-type": "application/json; charset=UTF-8" }})
+                .then(response => response.json())
+                .then(newEvent => this.setState({ allEvents: [...this.state.allEvents, newEvent]}))
+    }
+
+    loadAllEvents = () => {
+        fetch('http://localhost:3000/events')
+            .then(response => response.json())
+            .then(allEvents => this.setState({ allEvents }))
+    }
+
     render() {
         return (
             <>
-                <EventForm />
-                <EventList />
+                <EventForm 
+                    addNewEvent={this.addNewEvent}
+                />
+                <EventList
+                    allEvents={this.state.allEvents}
+                />
             </>
         );
     }
