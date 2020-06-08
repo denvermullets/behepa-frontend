@@ -38,21 +38,30 @@ class EventForm extends Component {
     this.setState({ helper: e.target.checked })
   }
 
-  // handleSubmit = () => {
-  //   // form doesn't pass values for some reason, temp pass
-  //   // current state values instead
-  //   alert('hi buddy')
-  // }
+  resetForm = () => {
+    // this.setState({ 
+    //   event: '',
+    //   date: '',
+    //   time: '',
+    //   helper: false,
+    //   description: ''
+    // })
+    alert('hi buddy')
+    // this.props.form.resetFields('Metric');
+  }
+
 
   render() {
     return (
       <>
         <Form 
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 14 }}
-          layout="horizontal"
+          name="newEvent"
+          layout="inline"
+          onSubmit={this.resetForm}
+          // onFinish={(e) => this.props.addNewEvent(this.state)}
           onFinish={(e) => this.props.addNewEvent(this.state)}
         >
+            
           <Form.Item>
             <Select
               name="event"
@@ -60,7 +69,7 @@ class EventForm extends Component {
               style={{ width: 200 }}
               placeholder="Select an event"
               optionFilterProp="children"
-              onChange={this.onEventChange}
+              // onChange={this.onEventChange}
               // onFocus={onFocus}
               // onBlur={onBlur}
               // onSearch={onSearch}
@@ -78,9 +87,9 @@ class EventForm extends Component {
           <Form.Item>
             <DatePicker  
               name="date"
-              onChange={this.onDateChange}
+              // onChange={this.onDateChange}
               // value={this.state.date}
-            />
+              />
           </Form.Item>
           
           <Form.Item>
@@ -88,7 +97,7 @@ class EventForm extends Component {
               name="time"
               minuteStep={15}
               format={format}
-              onChange={this.onTimeChange}
+              // onChange={this.onTimeChange}
               // value={this.state.time}
               />
           </Form.Item>
@@ -96,26 +105,25 @@ class EventForm extends Component {
           <Form.Item>
             <Checkbox
              name="helper"
-             checked={this.state.helper}
-             onChange={this.onCheckedChange}
-            >
+            //  checked={this.state.helper}
+            //  onChange={this.onCheckedChange}
+             >
               Need Helper</Checkbox>
           </Form.Item>
           
           <Form.Item>
 
           <TextArea
-            // value={value}
+            // value={this.state.description}
             name="description"
-            onChange={this.onFormChange}
-            name="description"
+            // onChange={this.onFormChange}
             placeholder="Notes for event"
             autoSize={{ minRows: 1, maxRows: 5 }}
             />
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit">Create Event</Button>
+            <Button type="primary" htmlType="submit" >Create Event</Button>
           </Form.Item>
         </Form>
       </>
